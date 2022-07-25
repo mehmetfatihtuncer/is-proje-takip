@@ -1,3 +1,12 @@
+<?php
+include('islemler/baglan.php');
+
+$ayarsor=$db->prepare("SELECT * FROM ayarlar");
+$ayarsor->execute();
+$ayarcek = $ayarsor->fetch(PDO::FETCH_ASSOC);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +18,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title><?php echo $ayarcek['site_baslik'] ?></title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

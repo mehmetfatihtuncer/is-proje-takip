@@ -34,10 +34,33 @@ if(isset($_POST['oturumac'])){
     if ($sonuc==0){
         echo "Mail yada şifreniz hatalı";
     }else{
-        echo "Başarılı";
+        header("location:../index.php");
         $_SESSION['kullanici_mail'] = $_POST['kullanici_mail'];
     }
 }
 
+if(isset($_POST['projeekle'])){
+    $projeekle = $db->prepare("INSERT INTO projeler SET
+        proje_baslik=:baslik,
+        proje_teslim_tarihi=:teslim_tarihi,
+        proje_aciliyet=:aciliyet,
+        proje_durum=:durum,
+        proje_detay=:detay
+        ");
+    $projeekle->execute(array(
+        'baslik' => $_POST['proje_baslik'],
+        'teslim_tarihi' => $_POST['proje_teslim_tarihi'],
+        'aciliyet' => $_POST['proje_aciliyet'],
+        'durum'    => $_POST['proje_durum'],
+        'detay' => $_POST['proje_detay']
+    ));
+
+    if ($projeekle){
+    header("location:../index.php");
+    }else{
+    echo"Başarısız";
+    exit;
+    }
 
 
+};
